@@ -41,12 +41,13 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = _env_list(
     'DJANGO_CSRF_TRUSTED_ORIGINS',
-    'http://127.0.0.1:8000,http://localhost:8000,https://web-production-39a9cd.up.railway.app',
+    'http://127.0.0.1:8000,http://localhost:8000,https://*.onrender.com,https://web-production-39a9cd.up.railway.app',
 )
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
